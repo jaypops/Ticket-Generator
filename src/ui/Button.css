@@ -1,34 +1,60 @@
 .custom-button {
-    padding: 12px 32px; /* Increased horizontal padding */
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 160px; /* Increased min-width to make buttons more rectangular */
-    height: 45px; /* Added fixed height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding: 12px 32px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 160px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-button.primary {
+  background-color: #26b5c0;
+  color: white;
+  border: none;
+}
+
+.custom-button.primary:hover {
+  background-color: #1fa1ab;
+}
+
+.custom-button.secondary {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff40;
+}
+
+.custom-button.secondary:hover {
+  background-color: #ffffff10;
+}
+
+.custom-button.uni {
+  background-color: #fff;
+  color: #197686;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: "JejuMyeongjo";
+  font-size: 18px;
+}
+
+.custom-button.uni:hover {
+  background-color: #ffffffc4;
+}
+@media (max-width: 480px) {
+  .custom-button {
+    padding: 8px 20px;
+    font-size: 12px;
+    min-width: 120px;
+    height: 35px;
   }
-  
-  .custom-button.primary {
-    background-color: #26b5c0;
-    color: white;
-    border: none;
+
+  .custom-button.uni {
+    font-size: 14px;
+    padding: 0.3rem 0.6rem;
   }
-  
-  .custom-button.primary:hover {
-    background-color: #1fa1ab;
-  }
-  
-  .custom-button.secondary {
-    background-color: transparent;
-    color: #ffffff;
-    border: 1px solid #ffffff40;
-  }
-  
-  .custom-button.secondary:hover {
-    background-color: #ffffff10;
-  }
-  
-  
+}

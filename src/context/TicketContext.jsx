@@ -5,18 +5,20 @@ const TicketContext = createContext();
 
 const initialState = {
   currentStep: 1,
-  Ticketnum: 1,
-  Ticketype: null,
+  ticketNum: 1,  
+  ticketType: null,
 };
 function reducer(state, action) {
   switch (action.type) {
     case "SELECT_TICKET":
-      return { ...state, Ticketype: action.payload };
+      return { ...state, ticketType: action.payload.title }; 
     case "SET_TICKET_NUMBER":
-      return { ...state, Ticketnum: action.payload };
+      return { ...state, ticketNum: action.payload }; 
     case "NEXT_STEP":
       return { ...state, currentStep: state.currentStep + 1 };
     case "PREV_STEP":
+      return { ...state, currentStep: state.currentStep - 1 };
+    case "BACK_TO_SELECT_TICKET":
       return { ...state, currentStep: 1 };
     default:
       return state;

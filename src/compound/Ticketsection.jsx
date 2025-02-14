@@ -26,11 +26,13 @@ function Ticketsection() {
     setSelectedId(ticket.id);
     dispatch({ type: "SELECT_TICKET", payload: ticket });
   };
+  
 
   const handleChange = (e) => {
     setTickets(e.target.value);
     dispatch({ type: "SET_TICKET_NUMBER", payload: e.target.value });
   };
+  
 
   const handleNext = () => {
     if (selectedId) {

@@ -1,4 +1,6 @@
 @import url(https://db.onlinewebfonts.com/c/1a5c2d8bbd4e28d99a6efcbb9a5b378f?family=JejuMyeongjo);
+@import url("https://fonts.googleapis.com/css2?family=Alatsi&family=SUSE:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alatsi&family=Road+Rage&family=SUSE:wght@100..800&display=swap");
 @import "tailwindcss";
 body {
   padding: 0;
@@ -22,6 +24,35 @@ body {
 }
 .space {
   margin-top: 4rem;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+.borb {
+  background-color: #041e23;
+  border-radius: 40px;
+  border: 1px solid #0e464f;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "JejuMyeongjo";
+  font-weight: normal;
+}
+.header h1 {
+  font-size: 2rem;
 }
 
 /* Navbar */
@@ -55,42 +86,12 @@ body {
   font-family: "JejuMyeongjo";
   font-size: 18px;
 }
-.navb button {
-  background-color: #fff;
-  color: 197686;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-family: "JejuMyeongjo";
-  font-size: 18px;
-}
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100%;
-}
-.borb {
-  background-color: #041e23;
-  border-radius: 40px;
-  border: 1px solid #0e464f;
-  padding: 1.5rem;
-  width: 90%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 5rem;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: "JejuMyeongjo";
-  font-weight: normal;
+@media screen and (max-width: 480px) {
+  .nav {
+    display: none;
+  }
+
 }
 
 /* Ticketsection */
@@ -155,6 +156,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1rem;
 }
 .tickline {
   width: 100%;
@@ -169,6 +171,7 @@ body {
   margin-bottom: 1rem;
   display: flex;
   align-items: flex-start;
+  margin-top: 1rem;
 }
 
 .ticks {
@@ -254,6 +257,92 @@ body {
   justify-content: space-between;
 }
 
+/* Mobile screens */
+@media (max-width: 480px) {
+  .borb {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .ticktext h1 {
+    font-size: 2rem;
+  }
+
+  .ticktext p {
+    font-size: 0.8rem;
+    width: 90%;
+  }
+
+  .ticks {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tickpick {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .tickpick h1 {
+    font-size: 1rem;
+  }
+
+  .tickpick h2 {
+    font-size: 0.9rem;
+  }
+
+  .tickpick h3 {
+    font-size: 0.8rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Small tablets */
+@media (max-width: 768px) {
+  .borb {
+    width: 85%;
+  }
+
+  .ticktext h1 {
+    font-size: 2.5rem;
+  }
+
+  .ticktext p {
+    width: 80%;
+  }
+
+  .ticks {
+    justify-content: center;
+  }
+
+  .tickpick {
+    width: 120px;
+    height: 100px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .borb {
+    max-width: 700px;
+  }
+
+  .ticktext h1 {
+    font-size: 3.5rem;
+  }
+
+  .tickpick {
+    width: 160px;
+    height: 120px;
+  }
+}
+
 /* ATTENDEE */
 .attmain {
   background-color: #041e23;
@@ -265,7 +354,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .attadark {
   background-color: rgb(2, 25, 29);
@@ -287,6 +376,56 @@ body {
 }
 .form-container {
   width: 100%;
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .attmain {
+    width: 95%;
+    padding: 1rem;
+    border-radius: 20px;
+    gap: 1rem;
+  }
+
+  .attadark {
+    min-height: 120px;
+  }
+
+  .attbtn {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header h3 {
+    font-size: 1rem;
+  }
+}
+
+/* Small tablets */
+@media (max-width: 768px) {
+  .attmain {
+    width: 85%;
+    padding: 1.2rem;
+  }
+
+  .attadark {
+    min-height: 150px;
+  }
+
+  .attbtn {
+    gap: 1rem;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .attmain {
+    max-width: 700px;
+  }
 }
 
 /* READY */
@@ -402,4 +541,78 @@ body {
   font-size: 12px;
   font-weight: bold;
   color: white;
+}
+
+.rebtn {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.reim {
+  position: relative;
+  top: 4.5rem;
+}
+
+/* Mobile Devices (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .recontainer {
+    width: 90%;
+    height: auto;
+    padding: 10px;
+    transform: translate(-50%, -50%);
+    height: 420px;
+    top: 39%;
+  }
+  .retitle {
+    font-size: 24px;
+  }
+  .reinfo p {
+    font-size: 8px;
+  }
+  .reimage {
+    width: 100px;
+    height: 100px;
+  }
+  .refield {
+    font-size: 10px;
+  }
+  .rebtn {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .reim{
+    top: 6rem;
+  }
+}
+
+/* Tablets (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .recontainer {
+    width: 80%;
+  }
+  .retitle {
+    font-size: 28px;
+  }
+  .reimage {
+    width: 120px;
+    height: 120px;
+  }
+  .rebtn {
+    gap: 1rem;
+  }
+}
+
+/* Larger Screens (min-width: 1024px) */
+@media screen and (min-width: 1024px) {
+  .recontainer {
+    width: 320px;
+  }
+  .retitle {
+    font-size: 36px;
+  }
+  .reimage {
+    width: 150px;
+    height: 150px;
+  }
 }

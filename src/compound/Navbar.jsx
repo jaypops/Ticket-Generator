@@ -1,3 +1,4 @@
+import { Button } from "../ui/Button";
 import logo from "./logo.png";
 function Navbar() {
   const nav = [
@@ -19,7 +20,7 @@ function Navbar() {
             </li>
           ))}
         </ul>
-        <button>My Ticket</button>
+          <Button variant="uni">My Ticket</Button>
       </div>
     </div>
   );
