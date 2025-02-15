@@ -7,9 +7,12 @@ import { useTicket } from "../context/TicketContext";
 
 function Attendee() {
   const { dispatch, selectedId, state } = useTicket();
-  const methods = useForm();
-  const { setValue } = methods;
+  const methods = useForm({ mode: "onChange" }); 
+  const { setValue, watch, formState } = methods;
   const [handleSubmitForm, setHandleSubmitForm] = useState(null);
+
+  const photoValue = watch("Photo");
+
   const onSubmit = (data) => {
     const combinedData = {
       ...data,
@@ -19,8 +22,6 @@ function Attendee() {
 
     localStorage.setItem("ticketFormData", JSON.stringify(combinedData));
     console.log("Form Data Submitted:", combinedData);
-
-    
   };
 
   const handleNext = () => {
@@ -60,7 +61,11 @@ function Attendee() {
               >
                 Back
               </Button>
-              <Button variant="primary" onClick={handleNext}>
+              <Button
+                variant="primary"
+                onClick={handleNext}
+                disabled={!photoValue || !formState.isValid} 
+              >
                 Get my free ticket
               </Button>
             </div>
@@ -70,5 +75,4 @@ function Attendee() {
     </div>
   );
 }
-
 export default Attendee;

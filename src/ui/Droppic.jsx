@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import "./Droppic.css";
 import useUpload from "../hooks/upload";
+import { FiDownloadCloud } from "react-icons/fi";
 
 export default function Droppic() {
   const { setValue } = useForm();
@@ -40,7 +41,7 @@ export default function Droppic() {
               className="file-input"
             />
             <label htmlFor="profile-photo" className="upload-label">
-              <div className="upload-icon"></div>
+              <div className="upload-icon"><FiDownloadCloud /></div>
               {upload ? (
                 <p>Uploading...</p>
               ) : (
