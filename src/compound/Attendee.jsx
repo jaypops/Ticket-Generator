@@ -21,7 +21,6 @@ function Attendee() {
     };
 
     localStorage.setItem("ticketFormData", JSON.stringify(combinedData));
-    console.log("Form Data Submitted:", combinedData);
   };
 
   const handleNext = () => {

@@ -45,7 +45,12 @@ export default function Form({ onSubmit, setHandleSubmit }) {
       <div className="input-group">
         <label>Special request?</label>
         <textarea
-          {...register("specialRequest")}
+          {...register("specialRequest", {
+            maxLength: {
+              value: 14,
+              message: "Special request must be at most 14 characters",
+            },
+          })}
           placeholder="Textarea"
           rows={4}
         />
