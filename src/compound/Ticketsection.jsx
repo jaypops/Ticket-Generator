@@ -25,7 +25,7 @@ function Ticketsection() {
 
   const handleTicketSelection = (ticket) => {
     setSelectedId(ticket.id);
-    dispatch({ type: "SELECT_TICKET", payload: ticket });
+    dispatch({ type: "SELECT_TICKET", payload: ticket }); 
   };
 
   const handleChange = (e) => {

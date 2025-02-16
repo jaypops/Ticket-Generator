@@ -2,11 +2,13 @@ import { useRef, useState } from "react";
 import Form from "../ui/Form";
 import Droppic from "../ui/Droppic";
 import { Button } from "../ui/Button";
-import { useTicket } from "../context/TicketContext"; 
+import { useTicket } from "../context/TicketContext";
+
 function Attendee() {
   const formRef = useRef(null);
   const [avatar, setAvatar] = useState("");
-  const { dispatch, setFormData, setAvatarUrl } = useTicket(); 
+  const { dispatch, state, setFormData, setAvatarUrl } = useTicket();
+  const { ticketType } = state;
 
   const handleGetTicket = () => {
     if (!formRef.current || !avatar) {
@@ -15,16 +17,22 @@ function Attendee() {
     }
 
     const isFormValid = formRef.current.validateForm();
-    if (!isFormValid) 
-      return;
+    if (!isFormValid) return;
 
     const formData = formRef.current.getFormData();
 
     setFormData(formData);
     setAvatarUrl(avatar);
 
-    dispatch({ type: "NEXT_STEP" }); 
+    dispatch({ type: "NEXT_STEP" });
   };
+
+  function handleBack() {
+    dispatch({ type: "PREV_STEP" });
+  }
+
+  const buttonText =
+    ticketType === "REGULAR ACCESS" ? "Get my free ticket" : "Get my ticket";
 
   return (
     <div className="main">
@@ -47,9 +55,11 @@ function Attendee() {
             <Form ref={formRef} />
           </div>
           <div className="attbtn">
-            <Button variant="secondary">Back</Button>
+            <Button variant="secondary" onClick={handleBack}>
+              Back
+            </Button>
             <Button variant="primary" onClick={handleGetTicket}>
-              Get my free ticket
+              {buttonText}
             </Button>
           </div>
         </div>

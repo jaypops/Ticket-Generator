@@ -3,11 +3,9 @@ import { useState, forwardRef, useImperativeHandle } from "react";
 import { z } from "zod";
 
 const schema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  specialRequest: z
-    .string()
-    .max(14, "Special request must be 14 characters or less"),
+  name: z.string().min(1),
+  email: z.string(),
+  specialRequest: z.string().max(14),
 });
 
 const Form = forwardRef((props, ref) => {
@@ -54,7 +52,7 @@ const Form = forwardRef((props, ref) => {
 
       <div className="input-group">
         <label>Enter your name</label>
-        {errors.name && <span className="error">{errors.name}</span>}
+        {errors.name && <span className="error">Name is required</span>}
         <input
           name="name"
           value={formData.name}
@@ -65,7 +63,7 @@ const Form = forwardRef((props, ref) => {
 
       <div className="input-group">
         <label>Enter your email *</label>
-        {errors.email && <span className="error">{errors.email}</span>}
+        {errors.email && <span className="error">Invalid email address</span>}
         <input
           name="email"
           value={formData.email}
@@ -77,7 +75,9 @@ const Form = forwardRef((props, ref) => {
       <div className="input-group">
         <label>Special request?</label>
         {errors.specialRequest && (
-          <span className="error">{errors.specialRequest}</span>
+          <span className="error">
+            Special request must be 14 characters or less
+          </span>
         )}
         <textarea
           name="specialRequest"
