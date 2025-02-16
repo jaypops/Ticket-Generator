@@ -3,31 +3,29 @@ import Form from "../ui/Form";
 import Droppic from "../ui/Droppic";
 import { Button } from "../ui/Button";
 import { useTicket } from "../context/TicketContext";
+import ProgressBar from "../ui/ProgressBar";
 
 function Attendee() {
   const formRef = useRef(null);
   const [avatar, setAvatar] = useState("");
   const { dispatch, state, setFormData, setAvatarUrl } = useTicket();
-  const { ticketType } = state;
+  const { ticketType, currentStep } = state;
   const handleGetTicket = () => {
     if (!formRef.current || !avatar) {
       alert("Please fill out the form and upload a profile picture.");
       return;
     }
-  
+
     const isFormValid = formRef.current.validateForm();
     if (!isFormValid) return;
-  
+
     const formData = formRef.current.getFormData();
-  
-    if (!formData.name || !formData.email) 
-      
-      return;
-    
-  
+
+    if (!formData.name || !formData.email) return;
+
     setFormData(formData);
     setAvatarUrl(avatar);
-  
+
     dispatch({ type: "NEXT_STEP" });
   };
 
@@ -46,6 +44,9 @@ function Attendee() {
           <h3>
             Step <span>2/3</span>
           </h3>
+        </div>
+        <div>
+          <ProgressBar currentStep={currentStep} totalSteps={3} />
         </div>
         <div className="tickglass">
           <div className="attmain">

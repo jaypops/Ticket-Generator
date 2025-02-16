@@ -2,10 +2,12 @@ import { useTicket } from "../context/TicketContext";
 import { Ticketcover } from "./Ticketcover";
 import { Button } from "../ui/Button";
 import srl from "./bar.svg";
+import ProgressBar from "../ui/ProgressBar";
 
 function Ready() {
   const { state, dispatch } = useTicket();
   const { formData, avatarUrl } = state;
+  const { currentStep } = state;
   const handleReset = () => {
     dispatch({ type: "BACK_TO_SELECT_TICKET" });
   };
@@ -18,6 +20,9 @@ function Ready() {
           <h3>
             Step <span>3/3</span>
           </h3>
+        </div>
+        <div>
+        <ProgressBar currentStep={currentStep} totalSteps={3} />
         </div>
         <div className="redetails">
           <h1>Your Ticket is Booked!</h1>

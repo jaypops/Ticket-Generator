@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useTicket } from "../context/TicketContext";
 import { Dropdown } from "../ui/Dropdown";
 import { Button } from "../ui/Button";
+import ProgressBar from "../ui/ProgressBar";
+
 
 function Ticketsection() {
   const { dispatch, state, setSelectedId } = useTicket();
-  const { selectedId } = state;
+  const { selectedId,currentStep } = state;
 
   const [tickets, setTickets] = useState("1");
 
@@ -49,6 +51,9 @@ function Ticketsection() {
           <h3>
             Step <span>1/3</span>
           </h3>
+        </div>
+        <div>
+        <ProgressBar currentStep={currentStep} totalSteps={3} />
         </div>
         <div className="tickglass">
           <div className="ticktitle">
