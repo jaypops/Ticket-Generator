@@ -549,6 +549,13 @@ body {
   gap: 1.5rem;
 }
 
+.redetail .refield .value {
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 100px; 
+}
+
 .reim {
   position: relative;
   top: 4.5rem;

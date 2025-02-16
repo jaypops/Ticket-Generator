@@ -9,21 +9,25 @@ function Attendee() {
   const [avatar, setAvatar] = useState("");
   const { dispatch, state, setFormData, setAvatarUrl } = useTicket();
   const { ticketType } = state;
-
   const handleGetTicket = () => {
     if (!formRef.current || !avatar) {
       alert("Please fill out the form and upload a profile picture.");
       return;
     }
-
+  
     const isFormValid = formRef.current.validateForm();
     if (!isFormValid) return;
-
+  
     const formData = formRef.current.getFormData();
-
+  
+    if (!formData.name || !formData.email) 
+      
+      return;
+    
+  
     setFormData(formData);
     setAvatarUrl(avatar);
-
+  
     dispatch({ type: "NEXT_STEP" });
   };
 
