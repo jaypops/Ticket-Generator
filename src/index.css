@@ -267,35 +267,16 @@ body {
   .ticktext h1 {
     font-size: 2rem;
   }
-
+.ticks{
+  padding: 0.5rem;
+}
   .ticktext p {
     font-size: 0.8rem;
     width: 90%;
   }
-
-  .ticks {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .tickpick {
-    width: 100%;
-    height: auto;
-    padding: 1rem;
-    align-items: center;
-    text-align: center;
-  }
-
-  .tickpick h1 {
-    font-size: 1rem;
-  }
-
-  .tickpick h2 {
-    font-size: 0.9rem;
-  }
-
-  .tickpick h3 {
-    font-size: 0.8rem;
+  .ticks .tickpick {
+    width: 200px;
+    height: 90px;
   }
 
   .header h1 {
