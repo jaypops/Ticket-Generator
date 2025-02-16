@@ -1,55 +1,96 @@
-/* eslint-disable react/prop-types */
 import "./Form.css";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
+import { z } from "zod";
 
-export default function Form({ onSubmit, setHandleSubmit }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  specialRequest: z
+    .string()
+    .max(14, "Special request must be 14 characters or less"),
+});
 
-  useEffect(() => {
-    if (setHandleSubmit) {
-      setHandleSubmit(() => handleSubmit(onSubmit));
+const Form = forwardRef((props, ref) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    specialRequest: "",
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
     }
-  }, [handleSubmit, onSubmit, setHandleSubmit]);
+  };
+
+  const validateForm = () => {
+    const result = schema.safeParse(formData);
+    if (!result.success) {
+      setErrors(result.error?.formErrors?.fieldErrors || {});
+      return false;
+    }
+    setErrors({});
+    return true;
+  };
+
+  useImperativeHandle(ref, () => ({
+    getFormData: () => formData,
+    validateForm,
+  }));
 
   return (
     <form className="form-fields">
+      {Object.keys(errors).length > 0 && (
+        <div className="error-message">
+          {Object.values(errors).map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
+
       <div className="input-group">
         <label>Enter your name</label>
+        {errors.name && <span className="error">{errors.name}</span>}
         <input
-          {...register("name", { required: "Name is required" })}
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
           placeholder="Enter your name"
         />
-        {errors.name && <span className="error">{errors.name.message}</span>}
       </div>
 
       <div className="input-group">
         <label>Enter your email *</label>
+        {errors.email && <span className="error">{errors.email}</span>}
         <input
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
           placeholder="hello@avloglagos.io"
         />
-        {errors.email && <span className="error">{errors.email.message}</span>}
       </div>
 
       <div className="input-group">
         <label>Special request?</label>
+        {errors.specialRequest && (
+          <span className="error">{errors.specialRequest}</span>
+        )}
         <textarea
-          {...register("specialRequest")}
+          name="specialRequest"
+          value={formData.specialRequest}
+          onChange={handleChange}
           placeholder="Textarea"
           rows={4}
         />
       </div>
     </form>
   );
-}
+});
+
+Form.displayName = "Form";
+
+export default Form;

@@ -4,8 +4,9 @@ import { Dropdown } from "../ui/Dropdown";
 import { Button } from "../ui/Button";
 
 function Ticketsection() {
-  const { dispatch,setSelectedId, selectedId } = useTicket();
-  
+  const { dispatch, state, setSelectedId } = useTicket();
+  const { selectedId } = state;
+
   const [tickets, setTickets] = useState("1");
 
   const Tickets = [
@@ -26,13 +27,11 @@ function Ticketsection() {
     setSelectedId(ticket.id);
     dispatch({ type: "SELECT_TICKET", payload: ticket });
   };
-  
 
   const handleChange = (e) => {
     setTickets(e.target.value);
     dispatch({ type: "SET_TICKET_NUMBER", payload: e.target.value });
   };
-  
 
   const handleNext = () => {
     if (selectedId) {

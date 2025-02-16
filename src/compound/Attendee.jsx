@@ -1,36 +1,29 @@
-import { useForm, FormProvider } from "react-hook-form";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Form from "../ui/Form";
 import Droppic from "../ui/Droppic";
 import { Button } from "../ui/Button";
-import { useTicket } from "../context/TicketContext";
-
+import { useTicket } from "../context/TicketContext"; 
 function Attendee() {
-  const { dispatch, selectedId, state } = useTicket();
-  const methods = useForm();
-  const { setValue, watch } = methods; 
-  const [handleSubmitForm, setHandleSubmitForm] = useState(null);
+  const formRef = useRef(null);
+  const [avatar, setAvatar] = useState("");
+  const { dispatch, setFormData, setAvatarUrl } = useTicket(); 
 
-  const photoValue = watch("Photo");
-
-  const onSubmit = (data) => {
-    const combinedData = {
-      ...data,
-      ticketType: state.ticketType,
-      ticketNum: state.ticketNum,
-    };
-
-    localStorage.setItem("ticketFormData", JSON.stringify(combinedData));
-    console.log("Form Data Submitted:", combinedData);
-  };
-
-  const handleNext = () => {
-    if (selectedId) {
-      dispatch({ type: "NEXT_STEP" });
+  const handleGetTicket = () => {
+    if (!formRef.current || !avatar) {
+      alert("Please fill out the form and upload a profile picture.");
+      return;
     }
-    if (handleSubmitForm) {
-      handleSubmitForm();
-    }
+
+    const isFormValid = formRef.current.validateForm();
+    if (!isFormValid) 
+      return;
+
+    const formData = formRef.current.getFormData();
+
+    setFormData(formData);
+    setAvatarUrl(avatar);
+
+    dispatch({ type: "NEXT_STEP" }); 
   };
 
   return (
@@ -42,35 +35,24 @@ function Attendee() {
             Step <span>2/3</span>
           </h3>
         </div>
-        <FormProvider {...methods}>
-          <div className="tickglass">
-            <div className="attmain">
-              <label>Upload Profile Picture</label>
-              <div className="attadark">
-                <Droppic setValue={setValue} />
-              </div>
-            </div>
-            <div className="tickline"></div>
-            <div className="form-container">
-              <Form onSubmit={onSubmit} setHandleSubmit={setHandleSubmitForm} />
-            </div>
-            <div className="attbtn">
-              <Button
-                variant="secondary"
-                onClick={() => dispatch({ type: "PREV_STEP" })}
-              >
-                Back
-              </Button>
-              <Button
-                variant="primary"
-                onClick={handleNext}
-                disabled={!photoValue} 
-              >
-                Get my free ticket
-              </Button>
+        <div className="tickglass">
+          <div className="attmain">
+            <label>Upload Profile Picture</label>
+            <div className="attadark">
+              <Droppic setValue={(name, value) => setAvatar(value)} />
             </div>
           </div>
-        </FormProvider>
+          <div className="tickline"></div>
+          <div className="form-container">
+            <Form ref={formRef} />
+          </div>
+          <div className="attbtn">
+            <Button variant="secondary">Back</Button>
+            <Button variant="primary" onClick={handleGetTicket}>
+              Get my free ticket
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,22 +1,20 @@
-import { useForm } from "react-hook-form";
+/* eslint-disable react/prop-types */
 import "./Droppic.css";
-import useUpload from "../hooks/upload";
 import { FiDownloadCloud } from "react-icons/fi";
+import useUpload from "../hooks/upload";
 
-export default function Droppic() {
-  const { setValue } = useForm();
+export default function Droppic({ setValue }) {
   const { avatar, upload, uploadCloudinary } = useUpload(setValue);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      uploadCloudinary(file);
-    }
-  };
 
   const handleDrop = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     const file = e.dataTransfer.files[0];
+    if (file) uploadCloudinary(file);
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
       uploadCloudinary(file);
     }
@@ -37,11 +35,13 @@ export default function Droppic() {
               type="file"
               id="profile-photo"
               accept="image/*"
-              onChange={handleImageChange}
               className="file-input"
+              onChange={handleFileChange}
             />
             <label htmlFor="profile-photo" className="upload-label">
-              <div className="upload-icon"><FiDownloadCloud /></div>
+              <div className="upload-icon">
+                <FiDownloadCloud />
+              </div>
               {upload ? (
                 <p>Uploading...</p>
               ) : (
