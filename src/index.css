@@ -610,16 +610,6 @@ body {
   }
 }
 
-/* Larger Screens (min-width: 1024px) */
-@media screen and (min-width: 1024px) {
-  .recontainer {
-    width: 320px;
-  }
-  .retitle {
-    font-size: 36px;
-  }
-  .reimage {
-    width: 150px;
-    height: 150px;
-  }
-}
+
+
+
